@@ -1,0 +1,9 @@
+[global]
+host    = "127.0.0.1"
+port    = 8009
+
+[notify]
+text    = "Hello World"
+lang    = "en"
+
+[play]
