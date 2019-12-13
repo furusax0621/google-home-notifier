@@ -64,14 +64,14 @@ func main() {
 			lang = "en"
 		}
 		if err := client.Notify(text, lang); err != nil {
-			logrus.WithError(err).Fatal("unexpected error")
+			logrus.WithError(err).Error("unexpected error")
 		}
 	}
 
 	// send play
 	if url := conf.Play.URL; url != "" {
 		if err := client.Play(url); err != nil {
-			logrus.WithError(err).Fatal("unexpected error")
+			logrus.WithError(err).Error("unexpected error")
 		}
 	}
 
