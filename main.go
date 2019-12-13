@@ -4,10 +4,9 @@ import (
 	"context"
 	"os"
 
-	"github.com/sirupsen/logrus"
-
 	"github.com/kayac/go-config"
 	notifier "github.com/kunihiko-t/google-home-notifier-go"
+	"github.com/sirupsen/logrus"
 )
 
 // Config このアプリで使用できる設定値
@@ -74,5 +73,10 @@ func main() {
 		if err := client.Play(url); err != nil {
 			logrus.WithError(err).Fatal("unexpected error")
 		}
+	}
+
+	// quit application
+	if err := client.Quit(); err != nil {
+		logrus.WithError(err).Error("unexpected error")
 	}
 }
