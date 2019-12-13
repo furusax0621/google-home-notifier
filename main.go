@@ -2,8 +2,9 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"os"
+
+	"github.com/sirupsen/logrus"
 
 	"github.com/kayac/go-config"
 	notifier "github.com/kunihiko-t/google-home-notifier-go"
@@ -39,19 +40,21 @@ var defaultConfig = Config{
 
 func main() {
 	if len(os.Args) != 2 {
-		return
+		logrus.Fatal("config file is missing")
 	}
 	path := os.Args[1]
-	fmt.Println(path)
 
 	conf := defaultConfig
 	if err := config.LoadWithEnvTOML(&conf, path); err != nil {
-		panic(err)
+		logrus.WithFields(logrus.Fields{
+			"error": err,
+			"file":  path,
+		}).Fatal("failed to parse config file")
 	}
 
 	client, err := notifier.NewClient(context.Background(), conf.Global.Host, conf.Global.Port)
 	if err != nil {
-		panic(err)
+		logrus.WithError(err).Fatal("unexpected error")
 	}
 	defer client.Close()
 
@@ -62,14 +65,14 @@ func main() {
 			lang = "en"
 		}
 		if err := client.Notify(text, lang); err != nil {
-			panic(err)
+			logrus.WithError(err).Fatal("unexpected error")
 		}
 	}
 
 	// send play
 	if url := conf.Play.URL; url != "" {
 		if err := client.Play(url); err != nil {
-			panic(err)
+			logrus.WithError(err).Fatal("unexpected error")
 		}
 	}
 }

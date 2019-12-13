@@ -7,5 +7,6 @@ require (
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/kayac/go-config v0.1.0
 	github.com/kunihiko-t/google-home-notifier-go v0.0.0-20171117170621-686addab0d22
+	github.com/sirupsen/logrus v1.4.2
 	golang.org/x/net v0.0.0-20191209160850-c0dbc17a3553 // indirect
 )
