@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"os"
+	"time"
 
 	"github.com/kayac/go-config"
 	notifier "github.com/kunihiko-t/google-home-notifier-go"
@@ -17,8 +18,9 @@ type Config struct {
 }
 
 type globalConfig struct {
-	Host string `toml:"host"`
-	Port int    `toml:"port"`
+	Host     string        `toml:"host"`
+	Port     int           `toml:"port"`
+	Interval time.Duration `toml:"interval"`
 }
 
 type notifyConfig struct {
@@ -32,8 +34,9 @@ type playConfig struct {
 
 var defaultConfig = Config{
 	Global: globalConfig{
-		Host: "127.0.0.1",
-		Port: 8009,
+		Host:     "127.0.0.1",
+		Port:     8009,
+		Interval: 3,
 	},
 }
 
@@ -66,6 +69,7 @@ func main() {
 		if err := client.Notify(text, lang); err != nil {
 			logrus.WithError(err).Error("unexpected error")
 		}
+		time.Sleep(conf.Global.Interval * time.Second)
 	}
 
 	// send play
@@ -73,6 +77,7 @@ func main() {
 		if err := client.Play(url); err != nil {
 			logrus.WithError(err).Error("unexpected error")
 		}
+		time.Sleep(conf.Global.Interval * time.Second)
 	}
 
 	// quit application
