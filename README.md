@@ -10,9 +10,9 @@ notifier <config_file>
 
 ```toml
 [general]
-host     = 192.168.100.11 # hostname or ip address for Google Home
-port     = 8009           # (optional) connection port. default is 8009.
-interval = 3              # (optional) intervals after operation. default is 3 seconds
+host     = "192.168.100.11" # hostname or ip address for Google Home
+port     = 8009             # (optional) connection port. default is 8009.
+interval = 3                # (optional) intervals after operation. default is 3 seconds
 
 # configuration to speak text
 [notify]
