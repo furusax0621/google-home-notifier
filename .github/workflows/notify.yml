@@ -1,0 +1,17 @@
+name: notify
+on:
+  pull_request:
+    paths:
+      - 'README.md'
+
+jobs:
+  notify_rtCamp:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: rtCamp/action-slack-notify@v2.0.0
+        env:
+          SLACK_USERNAME: 'Notify by rtCamp'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_TITLE: 'Pull Request'
+          SLACK_MESSAGE: '[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})'
