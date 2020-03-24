@@ -16,7 +16,7 @@ interval = 3                # (optional) intervals after operation. default is 3
 
 # configuration to speak text
 [notify]
-text = "Hello World"
+text = "Hello World" # notify text
 lang = "en"          # (optional) language. default is "en"
 
 # configuration to play sounds
