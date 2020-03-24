@@ -58,3 +58,18 @@ jobs:
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
+  notify_shell:
+    name: 'Notify using Shell'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Send Notification'
+        run: |
+          jq -n '{
+            attachments: [{
+              pretext: ':droid: Notify by jq and curl :apple_inc:',
+              color: 'good',
+              title: '${{ github.event.pull_request.title }}',
+              title_link: '${{ github.event.pull_request.html_url }}'
+            }]
+          }' | curl -H 'Content-Type: application/json' -d @- ${{ secrets.SLACK_WEBHOOK }}
