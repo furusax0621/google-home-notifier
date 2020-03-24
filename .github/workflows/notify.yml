@@ -49,6 +49,7 @@ jobs:
           custom_payload: |
             {
               attachments: [{
+                  "author_name": "Notification"
                   pretext: 'Notify by 8398a7',
                   color: 'good',
                   title: '${{ github.event.pull_request.title }}',
