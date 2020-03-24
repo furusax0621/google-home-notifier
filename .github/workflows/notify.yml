@@ -46,13 +46,13 @@ jobs:
       - uses: 8398a7/action-slack@v3
         with:
           status: custom
-          payload: |
+          custom_payload: |
             {
-              "attachments": [{
-                  "pretext": "Notify by 8398a7",
-                  "color": "good",
-                  "title": "${{ github.event.pull_request.title }}",
-                  "title_link": "${{ github.event.pull_request.html_url }}"
+              attachments: [{
+                  text: 'Notify by 8398a7',
+                  color: 'good',
+                  title: '${{ github.event.pull_request.title }}',
+                  title_link: '${{ github.event.pull_request.html_url }}'
               }]
             }
         env:
