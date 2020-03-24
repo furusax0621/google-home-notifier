@@ -15,3 +15,15 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_TITLE: 'Pull Request'
           SLACK_MESSAGE: '<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}>'
+
+  notify_Ilshidur:
+    name: 'Notify by Ilshdur'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Ilshidur/action-slack@master
+        env:
+          SLACK_USERNAME: 'Notify by Ilshdur'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_AVATAR: sender
+        with:
+          args: '<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}>'
