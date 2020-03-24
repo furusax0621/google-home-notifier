@@ -49,7 +49,7 @@ jobs:
           custom_payload: |
             {
               attachments: [{
-                  text: 'Notify by 8398a7',
+                  pretext: 'Notify by 8398a7',
                   color: 'good',
                   title: '${{ github.event.pull_request.title }}',
                   title_link: '${{ github.event.pull_request.html_url }}'
