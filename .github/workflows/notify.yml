@@ -6,7 +6,7 @@ on:
 
 jobs:
   notify_rtCamp:
-    name: Slack Notification
+    name: 'Notify by rtCamp'
     runs-on: ubuntu-latest
     steps:
       - uses: rtCamp/action-slack-notify@v2.0.0
@@ -14,4 +14,4 @@ jobs:
           SLACK_USERNAME: 'Notify by rtCamp'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_TITLE: 'Pull Request'
-          SLACK_MESSAGE: '[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})'
+          SLACK_MESSAGE: '<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}>'
