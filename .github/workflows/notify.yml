@@ -46,6 +46,7 @@ jobs:
       - uses: 8398a7/action-slack@v3
         with:
           author_name: 'Notify by 8398a7'
+          username: '8398a7'
           status: custom
           custom_payload: |
             {
