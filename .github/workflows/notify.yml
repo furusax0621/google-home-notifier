@@ -43,7 +43,7 @@ jobs:
     name: 'Notify by 8398a7'
     runs-on: ubuntu-latest
     steps:
-      - uses: 8398a7/action-slack@v3
+      - uses: 8398a7/action-slack@master
         with:
           icon_emoji: ':tex:'
           status: custom
