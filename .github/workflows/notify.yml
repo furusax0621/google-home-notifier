@@ -28,16 +28,16 @@ jobs:
         with:
           args: '<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}>'
 
-  # notify_homoluctus:
-  #   name: 'Notify by homoluctus'
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: homoluctus/slatify@master
-  #       with:
-  #         type: ${{ job.status }}
-  #         icon_emoji: ':rocket:'
-  #         job_name: '<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}>'
-  #         url: ${{ secrets.SLACK_WEBHOOK }}
+  notify_homoluctus:
+    name: 'Notify by homoluctus'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: homoluctus/slatify@master
+        with:
+          type: ${{ job.status }}
+          icon_emoji: ':rocket:'
+          job_name: '<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}>'
+          url: ${{ secrets.SLACK_WEBHOOK }}
 
   notify_8398a7:
     name: 'Notify by 8398a7'
