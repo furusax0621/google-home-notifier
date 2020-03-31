@@ -1,9 +1,6 @@
 name: notify
 on:
   pull_request:
-    types: ['closed']
-    paths:
-      - 'webapi/swagger/**'
     branches:
       - master
 
