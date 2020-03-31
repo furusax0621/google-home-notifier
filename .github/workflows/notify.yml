@@ -18,4 +18,4 @@ jobs:
               title: ${{ toJSON(github.event.pull_request.title) }},
               title_link: "${{ github.event.pull_request.html_url }}"
             }]
-          }'' | curl -H 'Content-Type: application/json' -d @- ${{ secrets.SLACK_WEBHOOK }}
+          }' | curl -H 'Content-Type: application/json' -d @- ${{ secrets.SLACK_WEBHOOK }}
