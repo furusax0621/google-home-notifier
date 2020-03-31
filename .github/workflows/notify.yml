@@ -12,11 +12,5 @@ jobs:
       - name: 'Send Notification'
         run: |
           jq -n '${{
-            format('{
-              attachments: [{
-                pretext: "Swagger が更新されたよ！",
-                color: "good",
-                title: {0},
-                title_link: {1}
-            }', github.event.pull_request.title, github.event.pull_request.html_url )
+            format('{ text: {0} }', github.event.pull_request.title )
           }}' | curl -H 'Content-Type: application/json' -d @- ${{ secrets.SLACK_WEBHOOK }}
