@@ -1,0 +1,26 @@
+name: notify
+on:
+  pull_request:
+    types: ['closed']
+    paths:
+      - 'webapi/swagger/**'
+    branches:
+      - master
+
+jobs:
+  notify:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Send Notification'
+        run: |
+          jq -n '{
+            attachments: [{
+              pretext: "Swagger が更新されたよ！",
+              color: "good",
+              title: "${TITLE}",
+              title_link: "${{ github.event.pull_request.html_url }}"
+            }]
+          }' | curl -H 'Content-Type: application/json' -d @- ${{ secrets.SLACK_WEBHOOK }}
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
