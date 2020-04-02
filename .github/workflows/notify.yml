@@ -15,7 +15,7 @@ jobs:
             attachments: [{
               pretext: "Swagger が更新されたよ！",
               color: "good",
-              title: ${{ toJSON(github.event.pull_request.title) }},
+              title: "#${{ github.event.pull_request.id }} ${{ toJSON(github.event.pull_request.title) }}",
               title_link: "${{ github.event.pull_request.html_url }}"
             }]
           }' | curl -H 'Content-Type: application/json' -d @- ${{ secrets.SLACK_WEBHOOK }}
