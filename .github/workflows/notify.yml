@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: 'Send Notification'
         run: |
-          echo ${{ toJSON(github.event.pull_request) }} | jq -n '{
+          echo "${{ toJSON(github.event.pull_request) }}" | jq -n '{
             attachments: [{
               pretext: "Swagger が更新されたよ！",
               color: "good",
