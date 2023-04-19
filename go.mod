@@ -1,6 +1,6 @@
 module github.com/furusax0621/google-home-notifier
 
-go 1.18
+go 1.20
 
 require (
 	github.com/kayac/go-config v0.6.0
