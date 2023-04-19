@@ -5,8 +5,8 @@ import (
 	"os"
 	"time"
 
+	"github.com/furusax0621/google-home-notifier/notifier"
 	"github.com/kayac/go-config"
-	notifier "github.com/kunihiko-t/google-home-notifier-go"
 	"github.com/sirupsen/logrus"
 )
 
@@ -41,6 +41,9 @@ var defaultConfig = Config{
 }
 
 func main() {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
 	if len(os.Args) != 2 {
 		logrus.Fatal("config file is missing")
 	}
@@ -54,7 +57,7 @@ func main() {
 		}).Fatal("failed to parse config file")
 	}
 
-	client, err := notifier.NewClient(context.Background(), conf.Global.Host, conf.Global.Port)
+	client, err := notifier.NewClient(ctx, conf.Global.Host, conf.Global.Port)
 	if err != nil {
 		logrus.WithError(err).Fatal("unexpected error")
 	}
@@ -66,7 +69,7 @@ func main() {
 		if lang == "" {
 			lang = "en"
 		}
-		if err := client.Notify(text, lang); err != nil {
+		if err := client.Notify(ctx, text, lang); err != nil {
 			logrus.WithError(err).Error("unexpected error")
 		}
 		time.Sleep(conf.Global.Interval * time.Second)
@@ -74,14 +77,14 @@ func main() {
 
 	// send play
 	if url := conf.Play.URL; url != "" {
-		if err := client.Play(url); err != nil {
+		if err := client.Play(ctx, url); err != nil {
 			logrus.WithError(err).Error("unexpected error")
 		}
 		time.Sleep(conf.Global.Interval * time.Second)
 	}
 
 	// quit application
-	if err := client.Quit(); err != nil {
+	if err := client.Quit(ctx); err != nil {
 		logrus.WithError(err).Error("unexpected error")
 	}
 }
